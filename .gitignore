@@ -1,5 +1,6 @@
 /.pytest_cache
-/File.txt
 /log.html
-/output.xml
 /report.html
+*.png
+*.txt
+*.xml
