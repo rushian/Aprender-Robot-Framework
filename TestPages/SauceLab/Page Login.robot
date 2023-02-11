@@ -47,3 +47,15 @@ Entao sera exibida a mensagem de erro "Epic sadface: Username is required"
     Wait Until Element Is Visible    ${h3_username_required}
     ${texto_erro}    Get Text    ${h3_username_required}
     Should Be True    '${texto_erro}' == 'Epic sadface: Username is required'
+
+# =============== CT 243 ===============
+Quando eu preencher user padrao
+    Log to Console    Preencher somente a senha
+    Wait Until Element Is Visible    ${input_usuario}
+    Input Password    ${input_usuario}    ${user_padrao}
+    
+Entao sera exibida a mensagem de erro "Epic sadface: Username is required"
+    Log To Console    Validar mensagem de erro da senha
+    Wait Until Element Is Visible    ${h3_username_required}
+    ${texto_erro}    Get Text    ${h3_username_required}
+    Should Be True    '${texto_erro}' == 'Epic sadface: Username is required'
