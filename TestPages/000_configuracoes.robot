@@ -22,3 +22,10 @@ Printar tela inteira
 	Log To Console    Arquivo: ${nome_arquivo} Diretorio: ${diretorio}
 	${ResultadoPrint}=      Captura Tela    	${diretorio}    robot-scrshot-${nome_arquivo}.png    
 	Log To Console          ${ResultadoPrint}
+
+Randomizar valor
+...    [Documentation]    Passe o valor minimo e maximo, a rotina vai sortear um valor no intervalo (até o maximo -1)
+...    [Arguments]     ${minimo}    ${maximo}
+...    ${opcao_de_renegociacao}=      Randomize Value       ${minimo}        ${maximo}
+...    [Return]        ${opcao_de_renegociacao}
+

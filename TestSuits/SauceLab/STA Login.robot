@@ -17,4 +17,12 @@ Login sem usuario
     Quando eu preencher a senha do user padrao
     E clicar no botao login
     Entao sera exibida a mensagem de erro "Epic sadface: Username is required"
+
+Login sem senha
+    [Documentation]     Caso de Teste 243 
+    ...    ID: 3 Tipo do CT: Negativo 
+    Dado que abri a url no navegador
+    Quando eu preencher user padrao
+    E clicar no botao login
+    Entao sera exibida a mensagem de erro "Epic sadface: Password is required"
     

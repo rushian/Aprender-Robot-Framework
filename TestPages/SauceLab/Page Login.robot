@@ -2,6 +2,7 @@
 Documentation    Palavras chaves para o site https://www.saucedemo.com/
 Resource    ../000_configuracoes.robot
 *** Variables ***
+# valores padrao
 ${user_padrao}    standard_user
 ${senha}    secret_sauce
 
@@ -12,8 +13,8 @@ ${input_senha}      //*[@data-test='password']
 ${btn_login}        //*[@id='login-button']
 ${title_products}   //span[.='Products'] 
 # ===== CT 237 =====
-${h3_username_required}    //h3[contains(.,'Username is required')] 
-
+${h3_username_required}     //h3[contains(.,'Username is required')] 
+${h3_password_required}     //h3[contains(.,'Password is required')] 
 
 *** Keywords ***
 # =============== CT 235 ===============
@@ -54,8 +55,8 @@ Quando eu preencher user padrao
     Wait Until Element Is Visible    ${input_usuario}
     Input Password    ${input_usuario}    ${user_padrao}
     
-Entao sera exibida a mensagem de erro "Epic sadface: Username is required"
+Entao sera exibida a mensagem de erro "Epic sadface: Password is required"
     Log To Console    Validar mensagem de erro da senha
-    Wait Until Element Is Visible    ${h3_username_required}
-    ${texto_erro}    Get Text    ${h3_username_required}
-    Should Be True    '${texto_erro}' == 'Epic sadface: Username is required'
+    Wait Until Element Is Visible    ${h3_password_required}
+    ${texto_erro}    Get Text    ${h3_password_required}
+    Should Be True    '${texto_erro}' == 'Epic sadface: Password is required'
