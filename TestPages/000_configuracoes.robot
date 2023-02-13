@@ -19,9 +19,9 @@ Printar tela inteira
 	Create Directory        Evidencias\\${data_atual}\\${titulo}    
 	${diretorio}            Set Variable        ${EXECDIR}\\Evidencias\\${data_atual}\\${titulo}\\       
 	${nome_arquivo}=        Get Current Date             result_format=%H-%M-%S-%f
-	Log To Console    Arquivo: ${nome_arquivo} Diretorio: ${diretorio}
+	#Log To Console    Arquivo: ${nome_arquivo} Diretorio: ${diretorio}
 	${ResultadoPrint}=      Captura Tela    	${diretorio}    robot-scrshot-${nome_arquivo}.png    
-	Log To Console          ${ResultadoPrint}
+	Log To Console          ${ResultadoPrint} \\Evidencias\\${data_atual}\\${titulo}\\robot-scrshot-${nome_arquivo}.png 
 
 Randomizar valor
 	[Documentation]    Passe o valor minimo e maximo, a rotina vai sortear um valor no intervalo
