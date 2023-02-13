@@ -1,5 +1,6 @@
 *** Settings ***
 Documentation    Palavras chaves para o site https://www.saucedemo.com/
+...     Pagina do Login
 Resource    ../000_configuracoes.robot
 *** Variables ***
 # valores padrao
@@ -20,7 +21,7 @@ ${h3_password_required}     //h3[contains(.,'Password is required')]
 # =============== CT 235 ===============
 Dado que abri a url no navegador
     #exemplo de uso de palavras chaves, ou métodos criados por nós
-    Abrir browser    https://www.saucedemo.com/    chrome
+    Abrir browser    https://www.saucedemo.com/    chrome     
 
 Quando eu preencher o login e senha do user padrao
     Log To Console    Preencher login e senha

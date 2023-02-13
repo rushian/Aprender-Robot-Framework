@@ -7,10 +7,10 @@ Library 		../Resources/geral.py
 
 *** Keywords ***
 Abrir browser
-    [Arguments]    ${url}    ${browser} 
+	[Documentation]		Abre o navegador escolhido com a url fornecida
+    [Arguments]    ${url}    ${browser} 	
 	Open Browser    ${url}    ${browser}
 	Maximize Browser Window
-	Printar tela inteira
 	Log To Console    \nNavegador aberto: ${browser} com a url: ${url}
 
 Printar tela inteira
@@ -24,8 +24,8 @@ Printar tela inteira
 	Log To Console          ${ResultadoPrint}
 
 Randomizar valor
-...    [Documentation]    Passe o valor minimo e maximo, a rotina vai sortear um valor no intervalo (até o maximo -1)
-...    [Arguments]     ${minimo}    ${maximo}
-...    ${opcao_de_renegociacao}=      Randomize Value       ${minimo}        ${maximo}
-...    [Return]        ${opcao_de_renegociacao}
+	[Documentation]    Passe o valor minimo e maximo, a rotina vai sortear um valor no intervalo
+	[Arguments]     ${minimo}    ${maximo}
+	${opcao_de_renegociacao}=      Randomize Value       ${minimo}        ${maximo}
+    [Return]        ${opcao_de_renegociacao}
 

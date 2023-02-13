@@ -2,6 +2,7 @@
 /Evidencias
 /log.html
 /report.html
+*.log
 *.png
 *.pyc
 *.txt
