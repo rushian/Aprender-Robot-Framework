@@ -32,14 +32,14 @@ Clicar no pesquisar
     BuiltIn.Sleep    4
 
 *** Test Cases ***
-Abrir site
+CT 001: Abrir site
     Abrir browser
     Digitar termo [testes automatizados]
     Apertar tab
     Apertar tab com pyAutoGui
     Clicar no pesquisar
 
-Escrever no arquivo
+CT 002: Escrever no arquivo
     ${Text} =  Catenate    SEPARATOR=    Text1    \n     Text2     \n 
     ${Value}     set variable  Text4
     createFile          ${EXECDIR}/File.txt      ${Text}
