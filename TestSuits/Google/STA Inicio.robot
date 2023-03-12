@@ -3,7 +3,7 @@ Documentation    Suite de Testes Automatizados para Pesquisar no google
 Resource     ../../Resources/base.robot
 
 *** Test Cases ***
-Abrir site
+Caso de Teste: Abrir site
     Dado que abri o google no navegador
     Quando digitar um termo [testes automatizados]
     E apertar tab
