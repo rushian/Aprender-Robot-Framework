@@ -8,6 +8,8 @@ Sites a serem utilizados:
 
 http://www.google.com
 
+https://www.saucedemo.com/
+
 https://demo.applitools.com
 
 https://demoqa.com

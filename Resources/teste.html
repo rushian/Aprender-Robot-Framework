@@ -1,0 +1,173 @@
+<html>
+	<head>       
+		<title>Learning</title>
+		<style type="text/css"> 
+			body{background-color: #303030; color: #c0c0c0; padding-top:120px; padding-left:120px;}
+			h1{font-family: 'Open Sans', Biome, Helvetica; text-transform: uppercase;}
+			table {border: 1px solid; padding: 0px;}
+			td {border: 1px solid; padding: 0px;}
+			th {border: 1px solid; padding: 0px;}
+			a{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #b8860b;}
+			a:visited{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #c0c0c0;}
+			a:active{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: chartreuse;}
+			a:hover{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;}
+			.geral{display: flex; width: 100%; }
+			.cinquenta{width: 50%;}
+			.caixa{width: 400px; height: 50%;background-color: black; color: #fff;}
+		</style>
+	</head>
+	<body>
+		<h1>Tabelas e campos para testar as palavras-chaves do robot</h1>
+		<div class="geral"> 
+			<div class="cinquenta">
+				<p>Campo preenchido <input id="campo-com-valor" value="   valor   23    "></p>
+				
+				<button onclick="openWin()" >
+					<span>Imprimir contrato</span>
+				</button>
+				<table width='80%'>
+					<thead>
+						<tr style="font-weight: bold">
+							<th style="border: 1px solid; padding: 0px">Ativar</th>
+							<th style="border: 1px solid; padding: 0px">Texto</th>
+							<th style="border: 1px solid; padding: 0px">titulo3</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+								<td>Dado 1</td>
+								<td>Dado 2</td>
+								<td>Dado 3</td>
+						</tr>
+						<tr>
+								<td>Dado 4</td>
+								<td>Dado 5</td>
+								<td>Dado 6</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>
+					<a class="header__nav--ctas-matricule" href="#">Matricule-se</a></p>
+				<p>&nbsp;</p>
+				<table>
+					<thead>
+					<tr>
+					<th style="width: 80px;" >Ativar</th>
+					<th style="width: 200px;" >Ação</th>
+					<th>Numero</th>
+					</tr>
+					</head>
+					<tbody >
+					<tr class="inativo">
+						<td  style="text-align: center;"><label  ><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td> CREDITO</td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td></tr>
+					<tr class="inativo">
+						<td  style="text-align: center;"><label  ><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td> AGENDAMENTO</td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;"><label  ><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td > DESFAZER </td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td>
+					</tr>
+					<tr  class="inativo">
+						<td  style="text-align: center;"><label><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td > ESTORNO</td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td>
+					</tr></tbody>
+				</table>
+			</div>
+			<div>
+				<textarea class="caixa" id="payload" readonly>
+{
+  "paciente": [
+    {
+      "dados_pessoais": {
+        "nome": "Luciano Silva",
+        "idade": 35
+      },
+      "dados_clinicos": {
+        "data_consulta": "2023-07-03",
+        "medico": "Dr. Carlos",
+        "receituario": "Tomar medicamento X, 1 vez ao dia"
+      }
+    },
+    {
+      "dados_pessoais": {
+        "nome": "Maria Souza",
+        "idade": 42
+      },
+      "dados_clinicos": {
+        "data_consulta": "2023-07-05",
+        "medico": "Dr. Ana",
+        "receituario": "Tomar medicamento Y, 2 vezes ao dia"
+      }
+    },
+    {
+      "dados_pessoais": {
+        "nome": "Carlos Alberto",
+        "idade": 18
+      },
+      "dados_clinicos": {
+        "data_consulta": "2023-03-08",
+        "medico": "Dr. Carlos",
+        "receituario": "Indisponivel"
+      }
+    }
+  ]
+}</textarea>	
+<textarea class="caixa" id="payload">
+{
+	"paciente": [
+	{
+		"dados_pessoais": {
+		"nome": "Luke",
+		"idade": 35
+		},
+		"dados_clinicos": {
+		"data_consulta": "2023-07-03",
+		"medico": "Dr. Carlos",
+		"receituario": "Tomar medicamento X, 1 vez ao dia"
+		}
+	}
+	]
+}</textarea>	
+			</div>
+		</div>
+		<p>&nbsp;</p>
+		<table width='80%'>
+			<thead>
+				<tr style="font-weight: bold">
+					<th style="border: 1px solid; padding: 0px">Ativar</th>
+					<th style="border: 1px solid; padding: 0px">Peça</th>
+					<th style="border: 1px solid; padding: 0px">titulo3</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+						<td>Dado 1</td>
+						<td>Dado 2</td>
+						<td>Dado 3</td>
+				</tr>
+				<tr>
+						<td>Dado 4</td>
+						<td>Dado 5</td>
+						<td>Dado 6</td>
+				</tr>
+			</tbody>
+		</table>
+		<input type="radio" name="amortizacao" value="s"> sac
+		<input type="radio" name="amortizacao" value="p"> price
+		<script>
+		function openWin(){
+			myWindow = window.open('','','width=800,height=600');
+			myWindow.document.write("<p>This is 'myWindow'</p>");
+			//myWindow.focus();
+			//confirm('a')
+			myWindow.print(); 
+		}
+		</script>
+	</body>
+<html>

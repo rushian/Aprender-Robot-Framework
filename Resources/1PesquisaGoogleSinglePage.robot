@@ -30,17 +30,18 @@ Apertar tab com pyAutoGui
 Clicar no pesquisar
     Click Element    (//*[@name='btnK'])[2]
     BuiltIn.Sleep    4
-
+Escrever no arquivo
+    ${Text} =  Catenate    SEPARATOR=    Text1    \n     Text2     \n 
+    ${Value}     set variable  Text4
+    createFile          ${EXECDIR}/File.txt      ${Text}
+    Append To File      ${EXECDIR}/File.txt   ${Value}
 *** Test Cases ***
-CT 001: Abrir site
+CT01 Abrir site
     Abrir browser
     Digitar termo [testes automatizados]
     Apertar tab
     Apertar tab com pyAutoGui
     Clicar no pesquisar
 
-CT 002: Escrever no arquivo
-    ${Text} =  Catenate    SEPARATOR=    Text1    \n     Text2     \n 
-    ${Value}     set variable  Text4
-    createFile          ${EXECDIR}/File.txt      ${Text}
-    Append To File      ${EXECDIR}/File.txt   ${Value}
+CT02 Escrever no arquivo
+    Escrever no arquivo

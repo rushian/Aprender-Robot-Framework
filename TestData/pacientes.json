@@ -1,0 +1,26 @@
+{
+    "paciente": [
+      {
+        "dados_pessoais": {
+          "nome": "Luciano Silva",
+          "idade": 35
+        },
+        "dados_clinicos": {
+          "data_consulta": "2023-07-03",
+          "medico": "Dr. Carlos",
+          "receituario": "Tomar medicamento X, 1 vez ao dia"
+        }
+      },
+      {
+        "dados_pessoais": {
+          "nome": "Maria Souza",
+          "idade": 42
+        },
+        "dados_clinicos": {
+          "data_consulta": "2023-07-05",
+          "medico": "Drª Ana",
+          "receituario": "Tomar medicamento Y, 2 vezes ao dia"
+        }
+      }
+    ]
+  }

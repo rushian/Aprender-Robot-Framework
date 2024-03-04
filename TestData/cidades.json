@@ -1,0 +1,27 @@
+[
+        {
+            "indice": 0,
+            "cidade":"São Paulo",
+            "uf":"SP"
+        },
+        {
+            "indice": 1,
+            "cidade":"Rio de Janeiro",
+            "uf":"RJ"
+        },
+        {
+            "indice": 2,
+            "cidade":"Belo horizonte",
+            "uf":"MG"
+        },
+        {
+            "indice": 3,
+            "cidade":"Itanhaém",
+            "uf":"SP"
+        },
+        {
+            "indice": 4,
+            "cidade":"Vitória",
+            "uf":"ES"
+        }
+    ]

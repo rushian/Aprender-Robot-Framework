@@ -3,12 +3,12 @@ Documentation       Palavras chaves para o site https://www.saucedemo.com/
 ...                 Pagina de Produtos
 ...    Na Key Word 'Quando escolher 3 itens da lista aleatoriamente' ha um exemplo de uso 
 ...    da rotina feita em python, este recurso só e possivel porque no arquivo 
-...    000_configuracoes.robot foi importada a library criada geral.py e criada a KW 
-...    
+...    base.robot foi importada a library criada geral.py e criada a KW 
 
-Resource            ../000_configuracoes.robot
-Library             Collections
-Resource            Page Login.robot
+
+Resource    ../../Resources/base.robot
+
+Resource            Steps01_Login.robot
 
 
 *** Variables ***
@@ -54,7 +54,7 @@ Quando escolher 3 itens da lista aleatoriamente
         #Log To Console    ${path}
         Click Element    ${path}
     END
-    Printar tela inteira
+    Tirar print
     Log To Console    Valores sorteados ${lista_escolhidos}
     Sleep    2s
 
@@ -87,6 +87,6 @@ E finalizar a Compra
 Entao e exibida a mesangem "THANK YOU FOR YOUR ORDER"
     Log to Console  Verificar titulo de retorno
     Execute Javascript    window.scrollTo(0,0)
-    Printar tela inteira
+    Tirar print
     
     Element Should Contain    ${titulo_agradecimento}    THANK YOU FOR YOUR ORDER   None    True

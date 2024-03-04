@@ -1,7 +1,8 @@
 *** Settings ***
 Documentation    Palavras chaves para o site https://www.saucedemo.com/
 ...     Pagina do Login
-Resource    ../000_configuracoes.robot
+Resource    ../../Resources/base.robot
+
 *** Variables ***
 # valores padrao
 ${user_padrao}    standard_user
@@ -36,7 +37,7 @@ E clicar no botao login
 Entao a tela de produtos sera exibida
     Log To Console    Validar titulo Products
     Wait Until Element Is Visible    ${title_products}
-    Element Text Should Be    ${title_products}    PRODUCTS
+    Element Text Should Be    ${title_products}    Products
 
 # =============== CT 237 ===============
 Quando eu preencher a senha do user padrao
