@@ -13,9 +13,9 @@ Library             RequestsLibrary
 Library             String
 Library             geral.py
 
-
-Resource    ../Pages/Site02_SauceLab/Steps02_Inventory.robot
-
+*** Variables ***
+${PATH_DO_CHROMEDRIVER}    E:\\qa\\venv\\Scripts\\chromedriver.exe
+${navegador}    chrome
 *** Keywords ***
 Abrir browser
     [Documentation]    Abre o navegador escolhido com a url fornecida
@@ -34,11 +34,32 @@ Abrir browser
     Maximize Browser Window
     Log To Console    \nNavegador aberto: ${navegador} com a url: ${url}
 
+Abrir arquivo html
+    IF    '${navegador}' == 'chrome'
+        Open Browser
+        ...    file:${EXECDIR}/TestData/teste.html
+        ...    ${navegador}
+        ...    options=add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')
+        ...    executable_path=${PATH_DO_CHROMEDRIVER}
 
+        # Open Browser    file:${EXECDIR}/TestData/teste.html    ${navegador}
+        # ...    options=add_argument("--headless=chrome");add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')    executable_path=${PATH_DO_CHROMEDRIVER}
+    END
+    IF    '${navegador}' == 'firefox'
+        Open Browser
+        ...    file:${EXECDIR}/TestData/teste.html
+        ...    ${navegador}
+        ...    options=add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')
+    END
+    Maximize Browser Window
 Ler Arquivo Json
     [Arguments]    ${LocalArquivoJson}
     ${ArquivoJson}    Load Json From File    ${LocalArquivoJson}    UTF-8
     Log To Console    \nArquivo utilizado: ${LocalArquivoJson}
+    RETURN    ${ArquivoJson}
+Ler Arquivo Json [${localDoArquivo}] 
+    ${ArquivoJson}    Load Json From File    ${localDoArquivo}    UTF-8
+    Log To Console    \nArquivo utilizado: ${localDoArquivo}
     RETURN    ${ArquivoJson}
 	
 Printar tela inteira

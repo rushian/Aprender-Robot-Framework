@@ -13,8 +13,8 @@ ${cargo}       CargoTeste
 ############### CT 01 ################
 Dado que eu esteja conectado na VPN
     [Documentation]    Testa se a conexao com a internet esta funcionando
-    ${session}    Create Session    minhaSessao    https://servicos.caixa    verify=False
-    ${response}    GET On Session    minhaSessao    https://servicos.caixa
+    ${session}    Create Session    minhaSessao    http://www.google.com.br    verify=False
+    ${response}    GET On Session    minhaSessao    http://www.google.com.br
     Log To Console    Status Code da response: ${response.status_code}
     Should Be True    ${response.status_code} == 200
 

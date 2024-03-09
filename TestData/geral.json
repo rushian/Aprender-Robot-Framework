@@ -1,0 +1,33 @@
+{
+  "urls":{
+    "local":"TestData\\teste.html",
+    "gg":"http://www.google.com",
+    "prod":"http://www.blazedemo.com"
+  },
+  "usuarios":{
+    "aluno":{
+      "nome":"Luke",
+      "endereco":"rua do aluno, 7",
+      "telefone":"11 98555-5555",
+      "email":"aluno@teste.com"
+    },
+    "profissional": {
+      "nome": "Alana",
+      "endereco": "rua dos ricos, 81",
+      "telefone": "21 8544-7894",
+      "email": "alana@teste.com"
+    },
+    "admin": {
+      "nome": "admin",
+      "endereco": "rua do chefe, 5",
+      "telefone": "61 98547-5555",
+      "email": "admin@admin.com"
+    }
+  },
+  "massa":{
+    "validar conta":{
+      "usuario1":{"banco":"341","conta":"0523", "digito":"5","saldo": 8456.25},
+      "usuario2":{"banco":"260","conta":"1004", "digito":"0","saldo": 321.8}
+    }
+  }
+}

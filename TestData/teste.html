@@ -2,14 +2,16 @@
 	<head>       
 		<title>Learning</title>
 		<style type="text/css"> 
-			body{background-color: #303030; color: #c0c0c0; padding-top:120px; padding-left:120px;}
+			body{background-color: #303030; color: #c0c0c0; padding-top:60px; padding-left:60px;}
 			h1{font-family: 'Open Sans', Biome, Helvetica; text-transform: uppercase;}
 			table {border: 1px solid; padding: 0px;}
 			td {border: 1px solid; padding: 0px;}
 			th {border: 1px solid; padding: 0px;}
+			input{border-radius: 5px; }
 			.geral{display: flex; width: 100%; }
 			.cinquenta{width: 50%;}
-			.caixa{width: 400px; height: 50%;background-color: black; color: #fff;}
+			.caixa{width: 600px; height: 50%;background-color: black; color: #fff;}
+			.dados{border-radius: 20px; border: solid 1px #ffe81a;width: 300px;}
 		</style>
 	</head>
 	<body>
@@ -42,7 +44,16 @@
 						</tr>
 					</tbody>
 				</table>
-				<p>&nbsp;</p>
+				<div style="padding: 10px;">
+					<fieldset  id="dados" class="dados">
+						<legend>Formulario</legend>
+						<input id="name" placeholder="Nome"><br> 	
+						<input id="address" placeholder="Endereço"><br>
+						<input id="phone" placeholder="Telefone"><br>
+						<input id="email" placeholder="Email"><br>
+						<button id="contador" onclick="alert('campos preenchidos: ' + contarInputsPreenchidos())">Contar inputs preenchidos</button>
+					</fieldset>
+				</div>
 				<table>
 					<thead>
 					<tr>
@@ -73,7 +84,7 @@
 					</tr></tbody>
 				</table>
 			</div>
-			<div>
+			<div  class="cinquenta">
 				<textarea class="caixa" id="payload" readonly>
 {
   "paciente": [
@@ -131,6 +142,7 @@
 			</div>
 		</div>
 		<p>&nbsp;</p>
+		
 		<table width='80%'>
 			<thead>
 				<tr style="font-weight: bold">
@@ -162,6 +174,35 @@
 			//confirm('a')
 			myWindow.print(); 
 		}
+		function contarInputsPreenchidos() {
+  	// Obtém o elemento fieldset
+			const fieldset = document.getElementById("dados");
+
+			// Verifica se o fieldset existe
+			if (!fieldset) {
+				console.error("Elemento fieldset não encontrado");
+				return 0;
+			}
+
+			// Obtém todos os elementos input dentro do fieldset
+			const inputs = fieldset.querySelectorAll("input");
+
+			// Contador de inputs preenchidos
+			let contagem = 0;
+
+			// Percorre os inputs
+			for (const input of inputs) {
+				// Verifica se o valor do input não está vazio
+				if (input.value.trim() !== "") {
+					// Incrementa o contador
+					contagem++;
+				}
+			}
+
+			// Retorna a contagem de inputs preenchidos
+			return contagem;
+		}
+
 		</script>
 	</body>
 <html>

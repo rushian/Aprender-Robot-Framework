@@ -13,3 +13,9 @@ https://www.saucedemo.com/
 https://demo.applitools.com
 
 https://demoqa.com
+
+# Databases
+Neste projeto trago exemplos de como manipular dados no PostGreSQL e com sqlite
+Para fins de aprendizado eu instalei o PostGreSQL, durante a instalação é criada uma senha para o banco.
+Eu utilizo o DBeaver para acessar os bancos. 
+## Oracle
