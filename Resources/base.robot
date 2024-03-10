@@ -26,7 +26,7 @@ Abrir browser
     END
     IF    '${navegador}' == 'firefox'
         Open Browser
-        ...    file:${EXECDIR}/TestData/teste.html
+        ...    file:${EXECDIR}/Resources/teste.html
         ...    ${navegador}
         ...    options=add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')
     END
@@ -34,10 +34,10 @@ Abrir browser
     Maximize Browser Window
     Log To Console    \nNavegador aberto: ${navegador} com a url: ${url}
 
-Abrir arquivo html
+Abrir arquivo html [${path}]
     IF    '${navegador}' == 'chrome'
         Open Browser
-        ...    file:${EXECDIR}/TestData/teste.html
+        ...    file:${path}
         ...    ${navegador}
         ...    options=add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')
         ...    executable_path=${PATH_DO_CHROMEDRIVER}
@@ -47,7 +47,7 @@ Abrir arquivo html
     END
     IF    '${navegador}' == 'firefox'
         Open Browser
-        ...    file:${EXECDIR}/TestData/teste.html
+        ...    file:${path}
         ...    ${navegador}
         ...    options=add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')
     END

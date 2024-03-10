@@ -2,22 +2,32 @@
 	<head>       
 		<title>Learning</title>
 		<style type="text/css"> 
-			body{background-color: #303030; color: #c0c0c0; padding-top:120px; padding-left:120px;}
+			body{background-color: #303030; color: #c0c0c0; padding-top:60px; padding-left:60px;
+			font-family:  'Arial Narrow', Arial, sans-serif; }
 			h1{font-family: 'Open Sans', Biome, Helvetica; text-transform: uppercase;}
 			table {border: 1px solid; padding: 0px;}
 			td {border: 1px solid; padding: 0px;}
 			th {border: 1px solid; padding: 0px;}
+			input{border-radius: 5px; margin: 2px; border: 1px;}
+			button{border-radius: 5px;  margin: 2px;}
 			a{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #b8860b;}
-			a:visited{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #c0c0c0;}
-			a:active{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: chartreuse;}
 			a:hover{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: white;}
-			.geral{display: flex; width: 100%; }
-			.cinquenta{width: 50%;}
-			.caixa{width: 400px; height: 50%;background-color: black; color: #fff;}
+			a:visited{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #c0c0c0;}
+			a:focus{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #a80000;}
+			a:active{font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; color: #e1ff39;}
+			.geral{display: flex; width: 100%; padding: 2px;}
+			.cinquenta{width: 48%;}
+			.caixa{width: 600px; height: 50%;background-color: black; color: #fff;}
+			.dados{border-radius: 20px; border: solid 1px #ffe81a;  }
+			.msg{background-color: #cc5555; width: 90%;border-radius: 20px; border: solid 1px #7e0c0c;
+				color:#fff; 	font-family:  'Arial Narrow', Arial, sans-serif; padding: 7px;margin: 5px;}
 		</style>
 	</head>
 	<body>
-		<h1>Tabelas e campos para testar as palavras-chaves do robot</h1>
+		<a name='h1'></a><h1>Tabelas e campos para testar as palavras-chaves do robot</h1>
+		<div id="mensagem" style="display: none;" class="msg">
+  	aaaaaa
+		</div>
 		<div class="geral"> 
 			<div class="cinquenta">
 				<p>Campo preenchido <input id="campo-com-valor" value="   valor   23    "></p>
@@ -48,7 +58,27 @@
 				</table>
 				<p>
 					<a class="header__nav--ctas-matricule" href="#">Matricule-se</a></p>
-				<p>&nbsp;</p>
+
+				<div style="padding: 10px;">
+					<fieldset  id="dados" class="dados">
+						<legend>Dados do Usuario</legend>
+						<input id="name" placeholder="Nome"><br> 	
+						<input id="address" placeholder="Endereço"><br>
+						<input id="phone" placeholder="Telefone"> 
+						<input id="email" placeholder="Email"><br>
+						<button id="contador" onclick="alert('campos preenchidos: ' + contarInputsPreenchidos())">Contar inputs preenchidos</button>
+					</fieldset>
+					<fieldset  id="contas" class="dados">
+						<legend>Dados da conta</legend>
+						<input id="usuario" placeholder="Usuario"><br> 	
+						<input id="banco" placeholder="Banco" style="width: 60px;"> 
+						<input id="agencia" placeholder="Agencia" style="width: 60px;"> 
+						<input id="conta" placeholder="Conta"> 
+						<input id="digito" placeholder="Digito" style="width: 40px;"><br>
+						<input id="saldo" placeholder="Saldo"><br>
+						<button id="mostraMsg" onclick="mostrarMensagem()">Ver a mensagem</button>
+					</fieldset>
+				</div>
 				<table>
 					<thead>
 					<tr>
@@ -79,7 +109,7 @@
 					</tr></tbody>
 				</table>
 			</div>
-			<div>
+			<div  class="cinquenta">
 				<textarea class="caixa" id="payload" readonly>
 {
   "paciente": [
@@ -136,38 +166,123 @@
 }</textarea>	
 			</div>
 		</div>
-		<p>&nbsp;</p>
-		<table width='80%'>
-			<thead>
-				<tr style="font-weight: bold">
-					<th style="border: 1px solid; padding: 0px">Ativar</th>
-					<th style="border: 1px solid; padding: 0px">Peça</th>
-					<th style="border: 1px solid; padding: 0px">titulo3</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-						<td>Dado 1</td>
-						<td>Dado 2</td>
-						<td>Dado 3</td>
-				</tr>
-				<tr>
-						<td>Dado 4</td>
-						<td>Dado 5</td>
-						<td>Dado 6</td>
-				</tr>
-			</tbody>
-		</table>
-		<input type="radio" name="amortizacao" value="s"> sac
-		<input type="radio" name="amortizacao" value="p"> price
+	
+		<div class="geral">
+			<div class="cinquenta">
+				
+				<p><a>teste</a></p>
+				<p><a>teste</a></p>
+				<p><a>teste</a></p>
+				<p><a>teste</a></p>
+				<p><a href="#h1">Ir para o titulo</a></p>
+
+			</div>
+			<div class="cinquenta">
+				<table width='80%'>
+				<thead>
+					<tr style="font-weight: bold">
+						<th style="border: 1px solid; padding: 0px">Ativar</th>
+						<th style="border: 1px solid; padding: 0px">Peça</th>
+						<th style="border: 1px solid; padding: 0px">titulo3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+							<td>Dado 1</td>
+							<td>Dado 2</td>
+							<td>Dado 3</td>
+					</tr>
+					<tr>
+							<td>Dado 4</td>
+							<td>Dado 5</td>
+							<td>Dado 6</td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="radio" name="amortizacao" value="s"> sac
+			<input type="radio" name="amortizacao" value="p"> price
+		</div>
+	</div>
+
+
+
+
+
 		<script>
-		function openWin(){
-			myWindow = window.open('','','width=800,height=600');
-			myWindow.document.write("<p>This is 'myWindow'</p>");
-			//myWindow.focus();
-			//confirm('a')
-			myWindow.print(); 
+			function mostrarMensagem() {
+				const mensagem = document.getElementById("mensagem");
+				const user = document.getElementById("usuario").value;
+				const banco = document.getElementById("banco").value;
+				const agencia = document.getElementById("agencia").value;
+				const conta = document.getElementById("conta").value;
+				const digito = document.getElementById("digito").value;
+				const saldo = document.getElementById("saldo").value;
+
+				const msg = `Dados do usuario: ${user}<br> Banco: ${banco} Agencia: ${agencia} Conta: ${conta} - ${digito} <br>Saldo: R$ ` + formataSaldo(saldo);
+				mensagem.innerHTML = msg;
+				mensagem.style.display = "block";
+				scrollTo(0,0);
+			}
+			function formataSaldo(saldo_in){
+				var saldo = saldo_in.toString();
+				if (!saldo.includes(".")) {
+					if(saldo == '')
+						saldo = 0
+					// Se não possui, adiciona "." e "00" ao final da string
+					return `${saldo},00`;
+				}
+				// Separa a parte inteira da parte decimal
+				const [parteInteira, parteDecimal] = saldo.split(".");
+
+				// Formata a parte inteira com vírgulas
+				const parteInteiraFormatada = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+				// Se a parte decimal não existe, retorna a parte inteira formatada
+				if (!parteDecimal) return parteInteiraFormatada+',00';
+
+				// Se o módulo do saldo por 0,1 é 0, adiciona "0" no final da parte decimal
+				const parteDecimalFinal = Math.round(saldo_in % 0.1 *100)/100 === 0.1 ? `${parteDecimal}0` : `${parteDecimal}`;
+
+				// Retorna a string formatada
+				return `${parteInteiraFormatada},${parteDecimalFinal}`;
+			}
+
+			function openWin(){
+				myWindow = window.open('','','width=800,height=600');
+				myWindow.document.write("<p>This is 'myWindow'</p>");
+				//myWindow.focus();
+				//confirm('a')
+				myWindow.print(); 
+			}
+			function contarInputsPreenchidos() {
+			// Obtém o elemento fieldset
+				const fieldset = document.getElementById("dados");
+
+				// Verifica se o fieldset existe
+				if (!fieldset) {
+					console.error("Elemento fieldset não encontrado");
+					return 0;
+				}
+
+			// Obtém todos os elementos input dentro do fieldset
+			const inputs = fieldset.querySelectorAll("input");
+
+			// Contador de inputs preenchidos
+			let contagem = 0;
+
+			// Percorre os inputs
+			for (const input of inputs) {
+				// Verifica se o valor do input não está vazio
+				if (input.value.trim() !== "") {
+					// Incrementa o contador
+					contagem++;
+				}
+			}
+
+			// Retorna a contagem de inputs preenchidos
+			return contagem;
 		}
+
 		</script>
 	</body>
 <html>

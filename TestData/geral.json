@@ -1,6 +1,6 @@
 {
   "urls":{
-    "local":"TestData\\teste.html",
+    "local":"\\Resources\\teste.html",
     "gg":"http://www.google.com",
     "prod":"http://www.blazedemo.com"
   },
@@ -25,9 +25,10 @@
     }
   },
   "massa":{
-    "validar conta":{
-      "usuario1":{"banco":"341","conta":"0523", "digito":"5","saldo": 8456.25},
-      "usuario2":{"banco":"260","conta":"1004", "digito":"0","saldo": 321.8}
+    "validar-conta":{
+      "usuario1":{"banco":"341","agencia":"032","conta":"0523", "digito":"5","saldo": 8456.25},
+      "usuario2":{"banco":"260","agencia": "002","conta":"1004", "digito":"0","saldo": 321.8},
+      "30581177722":{"banco":"001","agencia": "10","conta":"258741", "digito":"13","saldo": 2568.33}
     }
   }
 }
