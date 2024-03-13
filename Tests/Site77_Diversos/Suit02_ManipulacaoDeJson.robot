@@ -26,11 +26,18 @@ CT03 Nao preencher os campos
     E clicar em Contar inputs preenchidos
     Entao sera exibida a mensagem campos preenchidos: 0
 
-CT04 Preencher dados da contador
+CT04 Preencher dados da conta
     [Documentation]    Caso de Teste Preenchendo dados a partir da leitura do json
     [Tags]    positivo
     Dado que li o json e abri o arquivo html
-    Quando eu preencher os dados da conta do usuario [usuario1]
+    Quando eu preencher os dados da conta do usuario [usuario2]
     E clicar em Ver a mensagem
     Entao será exibida a mensagem com os dados informados
 
+CT05 Preencher dados de todas as contas
+    [Documentation]    Caso de Teste Preenchendo dados a partir da leitura do json
+    [Tags]    positivo
+    Dado que li o json e abri o arquivo html
+    Quando iterar os usuarios
+    Entao as contas de cada usuario serao verificadas
+    

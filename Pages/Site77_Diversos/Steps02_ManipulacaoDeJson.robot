@@ -25,7 +25,7 @@ Dado que li o json e abri o arquivo html
     Dado que eu li o json geral
     ${arquivo}    Get Value From Json    ${conteudoJson}    $.urls.local
     ${path}    Catenate     SEPARATOR=    ${EXECDIR}    ${arquivo}[0]
-    Abrir arquivo html [${path}]
+    #Abrir arquivo html [${path}]
    
 Quando eu preencher os dados do formulario com as informacoes do aluno
     ${nome}        Get Value From Json    ${conteudoJson}    $.usuarios.aluno.nome
@@ -75,3 +75,24 @@ Entao será exibida a mensagem com os dados informados
     Element Should Contain    mensagem    ${conta}[0]
     Element Should Contain    mensagem    ${digito}[0]
     Sleep    2
+
+
+Quando iterar os usuarios
+    ${massa}    Get Dictionary Values    ${conteudoJson}    $.massa
+    ${caso_de_teste}    Get Dictionary Values    ${massa}[0]    $.validar-conta
+    ${users}    Get Dictionary Keys    ${casoDeTeste}[0]    sort_keys=False
+    ${qtde_users}    Get Length   ${users}   
+    Log To Console   ${users}
+    Log To Console   ${users}[2]
+
+    Log To Console   ${qtde_users}
+            ${user}    Get Value From Json    ${conteudoJson}    $.massa.validar-conta.${users}[2]
+        Log To Console   ${user}
+    # FOR    ${i}    IN RANGE    0    ${qtde_users}-1
+    #     ${user}    Get Value From Json    ${conteudoJson}    $.massa.validar-conta.${users}[${i}]
+    #     Log To Console   ${user}
+        
+    # END
+Entao as contas de cada usuario serao verificadas
+    No Operation
+    
