@@ -3,6 +3,7 @@ Documentation    Palavras chaves para a suite BancoDeDados
 
 Resource    ../../Resources/base.robot
 Library     ../../Resources/database.py
+Library    string
 
 *** Variables ***
 ${contato}     Teste
@@ -10,9 +11,11 @@ ${cargo}       CargoTeste
 
 
 *** Keywords ***
+
+    ${headers}    Create Dictionary    accept=teste/json     Content-Type=teste/json  
 ############### CT 01 ################
 Dado que eu esteja conectado na VPN
-    [Documentation]    Testa se a conexao com a internet esta funcionando
+    [Documentation]    Testa se a conexao com a internet esta funcionando  
     ${session}    Create Session    minhaSessao    http://www.google.com.br    verify=False
     ${response}    GET On Session    minhaSessao    http://www.google.com.br
     Log To Console    Status Code da response: ${response.status_code}

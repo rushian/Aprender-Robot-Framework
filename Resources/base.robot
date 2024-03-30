@@ -21,8 +21,8 @@ Abrir browser
     [Documentation]    Abre o navegador escolhido com a url fornecida
     [Arguments]    ${url}    ${navegador}
     IF    '${navegador}' == 'chrome'
-        #Open Browser    ${url}    ${navegador}     options=add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')     executable_path=${PATH_DO_CHROMEDRIVER}
-         Open Browser    ${url}    ${navegador}    options=add_argument("--headless=chrome");add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')    executable_path=${PATH_DO_CHROMEDRIVER}
+        Open Browser    ${url}    ${navegador}     options=add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')     executable_path=${PATH_DO_CHROMEDRIVER}
+         #Open Browser    ${url}    ${navegador}    options=add_argument("--headless=chrome");add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')    executable_path=${PATH_DO_CHROMEDRIVER}
     END
     IF    '${navegador}' == 'firefox'
         Open Browser

@@ -2,7 +2,7 @@
 Documentation       Suite de Testes para aprender o uso de palavras-chaves
 
 Resource            ../../Pages/Site77_Diversos/Steps01_Learn.robot
-# Test Teardown    Close Browser
+Test Teardown     Close Browser
 
 
 *** Test Cases ***
@@ -93,3 +93,8 @@ CT20 Listar itens
     Create order
 
 
+CT21 Abrir site e logar
+    [Documentation]    ID JIRA 2065557 - Abrir navegador na pagina do google e pesquisar um termo
+    [Tags]    positivo    abrirsite
+    Dado que abri o site no navegador informando dados
+    Entao o titulo 'Basic Auth' sera exibido

@@ -4,6 +4,9 @@ Documentation       Palavras chaves para a suite Learn
 Resource            ../../Resources/base.robot
 Library    Telnet
 
+
+
+
 *** Variables ***
 ${url}          http://www.google.com
 ${navegador}    chrome
@@ -367,3 +370,8 @@ Create order
     # Log To Console    ${items}
     # Log To Console    ${body}
     # Log To Console    ${json_string}
+Dado que abri o site no navegador informando dados
+    Open browser    https://admin:admin@the-internet.herokuapp.com/basic_auth    chrome
+
+Entao o titulo 'Basic Auth' sera exibido
+    Element Should Contain   //h3   Basic Auth
