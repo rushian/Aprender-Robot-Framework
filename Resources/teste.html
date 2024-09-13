@@ -30,7 +30,7 @@
 		</div>
 		<div class="geral"> 
 			<div class="cinquenta">
-				<p>Campo preenchido <input id="campo-com-valor" value="   valor   23    "></p>
+				<p>Campo preenchido <input id="campo-com-valor" value="   valor   23    " onfocus="this.select();"></p>
 				
 				<button onclick="openWin()" >
 					<span>Imprimir contrato</span>
@@ -62,8 +62,8 @@
 				<div style="padding: 10px;">
 					<fieldset  id="dados" class="dados">
 						<legend>Dados do Usuario</legend>
-						<input id="name" placeholder="Nome"><br> 	
-						<input id="address" placeholder="Endereço"><br>
+						<input id="name" placeholder="Nome" value="Luciano" onfocus="this.select();"><br> 	
+						<input id="address" placeholder="Endereço" value="endereco completo"><br>
 						<input id="phone" placeholder="Telefone"> 
 						<input id="email" placeholder="Email"><br>
 						<button id="contador" onclick="alert('campos preenchidos: ' + contarInputsPreenchidos())">Contar inputs preenchidos</button>
@@ -169,6 +169,12 @@
 	
 		<div class="geral">
 			<div class="cinquenta">
+			<select id="drops">
+				<option>Primeira opcao</option>
+				<option>Teste</option>
+				<option>Terceira opcao</option>
+				<option>Quarta opcao</option>
+			</select>
 				
 				<p><a>teste</a></p>
 				<p><a>teste</a></p>
@@ -202,6 +208,7 @@
 			<input type="radio" name="amortizacao" value="s"> sac
 			<input type="radio" name="amortizacao" value="p"> price
 		</div>
+
 	</div>
 
 

@@ -1,8 +1,9 @@
+Language: Brazilian Portuguese
 *** Settings ***
 Documentation       Suite de Testes para aprender o uso de palavras-chaves
 
 Resource            ../../Pages/Site77_Diversos/Steps02_ManipulacaoDeJson.robot
-Test Teardown    Close Browser
+
 
 *** Test Cases ***
 CT01 Verificar nome do profissional

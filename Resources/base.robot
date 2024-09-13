@@ -2,8 +2,8 @@
 Documentation    Arquivo base com palavras chaves comuns a todos os casos
 ...    Aqui também ficam as importações das bibliotecas comuns, em ordem alfabetica
 
-Library             SeleniumLibrary
-Library             BuiltIn
+Library             Selenium2Library
+
 Library             Collections
 Library             DatabaseLibrary
 Library             DateTime
@@ -13,6 +13,8 @@ Library             RequestsLibrary
 Library             String
 Library             geral.py
 
+
+
 *** Variables ***
 ${PATH_DO_CHROMEDRIVER}    E:\\qa\\venv\\Scripts\\chromedriver.exe
 ${navegador}    chrome
@@ -20,6 +22,7 @@ ${navegador}    chrome
 Abrir browser
     [Documentation]    Abre o navegador escolhido com a url fornecida
     [Arguments]    ${url}    ${navegador}
+    
     IF    '${navegador}' == 'chrome'
         Open Browser    ${url}    ${navegador}     options=add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')     executable_path=${PATH_DO_CHROMEDRIVER}
          #Open Browser    ${url}    ${navegador}    options=add_argument("--headless=chrome");add_experimental_option("detach",True);add_argument("--disable-extensions-except");add_argument("--disable-web-security");add_argument("--ignore-certificate-errors");add_argument("--allow-insecure-localhost");add_argument("--allow-cross-origin-auth-prompt");add_argument('--log-level=3')    executable_path=${PATH_DO_CHROMEDRIVER}
@@ -34,7 +37,8 @@ Abrir browser
     Maximize Browser Window
     Log To Console    \nNavegador aberto: ${navegador} com a url: ${url}
 
-Abrir arquivo html [${path}]
+Abrir arquivo html [${navegador}, ${path}]
+    Log To Console    \nCaminho: ${path} \nNavegador: ${navegador}
     IF    '${navegador}' == 'chrome'
         Open Browser
         ...    file:${path}

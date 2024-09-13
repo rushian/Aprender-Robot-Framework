@@ -2,8 +2,6 @@
 Documentation       Palavras chaves para a suite Learn
 
 Resource            ../../Resources/base.robot
-Library    Telnet
-
 
 
 
@@ -78,7 +76,7 @@ Buscar dados de todos pacientes
     END
 
 Dado que abri o arquivo
-    Abrir arquivo html
+    Abrir arquivo html [chrome, ${EXECDIR}\\Resources\\teste.html]
 
 Leio html
     ${file_content}    Get File    C:\\Users\\f675422\\Downloads\\RelatorioCertidaoNegativa (11).xls
@@ -149,6 +147,7 @@ Clique por id
     ${id}    Get Substring    ${elemento}    start
 
 E imprimo a tela
+    ret
     Run Keyword And Ignore Error
     ...    Execute Javascript
     ...    document.evaluate(".//button[span[contains(.,'Imprimir contrato')]]", document.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue.click();
@@ -167,7 +166,7 @@ Entao cancelo a impressao
 Escrever no arquivo
     ${Text}    Catenate    SEPARATOR=    Text1    \n    Text2    \n
     ${Value}    set variable    Text4
-    createFile    ${EXECDIR}/File.txt    ${Text}
+    Create File    ${EXECDIR}/File.txt    ${Text}    UTF-8
     Append To File    ${EXECDIR}/File.txt    ${Value}
 
 Entao os status estarao na lista
@@ -375,3 +374,19 @@ Dado que abri o site no navegador informando dados
 
 Entao o titulo 'Basic Auth' sera exibido
     Element Should Contain   //h3   Basic Auth
+
+Quando eu clicar no combobox
+    Scroll Element Into View    //a[text()='teste']
+    Click Element    drops
+Entao escolho um item da lista simulando a tecla seta pra baixo
+    Sleep    2
+    Press Keys    NONE    DOWN     DOWN    ENTER
+
+Quando eu registrar as coordenadas
+    ${y}     Get Vertical Position    id=usuario
+    ${x}    Get Horizontal Position    usuario
+    Set Suite Variable    ${x}
+    Set Suite Variable    ${y}
+Então exibo suas coordenadas
+    Log To Console    x= ${x} e y= ${y}
+    

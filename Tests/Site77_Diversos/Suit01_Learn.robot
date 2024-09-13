@@ -2,7 +2,7 @@
 Documentation       Suite de Testes para aprender o uso de palavras-chaves
 
 Resource            ../../Pages/Site77_Diversos/Steps01_Learn.robot
-Test Teardown     Close Browser
+#Test Teardown     Close Browser
 
 
 *** Test Cases ***
@@ -98,3 +98,13 @@ CT21 Abrir site e logar
     [Tags]    positivo    abrirsite
     Dado que abri o site no navegador informando dados
     Entao o titulo 'Basic Auth' sera exibido
+
+CT22 Descer nos itens de um dropdown
+    Dado que abri o arquivo
+    Quando eu clicar no combobox
+    Entao escolho um item da lista simulando a tecla seta pra baixo
+
+CT23 Pegar coordenadas de elementos
+    Dado que abri o arquivo
+    Quando eu registrar as coordenadas
+    Então exibo suas coordenadas
