@@ -7,12 +7,26 @@ Library        SeleniumLibrary
 Library        OperatingSystem
 Library        pyautogui
 
+*** Test Cases ***
+CT01 Abrir site
+    Abrir navegador
+    Digitar termo [testes automatizados]
+    Apertar tab
+    Apertar tab com pyAutoGui
+    Clicar no pesquisar
+    Fechar o navegador
+
+CT02 Escrever no arquivo
+    Escrever no arquivo
+
 *** Variables ***
 ${url}    http://www.google.com
 ${browser}    chrome
+${options}    options=add_experimental_option("detach",True)
+
 *** Keywords ***
-Abrir browser
-    Open Browser    ${url}    ${browser}   
+Abrir navegador
+    Open Browser    ${url}    ${browser}   ${options}
 	Maximize Browser Window
 
 Digitar termo [${termo}]
@@ -35,13 +49,6 @@ Escrever no arquivo
     ${Value}     set variable  Text4
     createFile          ${EXECDIR}/File.txt      ${Text}
     Append To File      ${EXECDIR}/File.txt   ${Value}
-*** Test Cases ***
-CT01 Abrir site
-    Abrir browser
-    Digitar termo [testes automatizados]
-    Apertar tab
-    Apertar tab com pyAutoGui
-    Clicar no pesquisar
 
-CT02 Escrever no arquivo
-    Escrever no arquivo
+Fechar o navegador
+    Close Browser

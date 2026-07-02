@@ -25,7 +25,7 @@ Dado que li o json e abri o arquivo html
     Dado que eu li o json geral
     ${arquivo}    Get Value From Json    ${conteudoJson}    $.urls.local
     ${path}    Catenate     SEPARATOR=    ${EXECDIR}    ${arquivo}[0]
-    #Abrir arquivo html [${path}]
+    Abrir arquivo html [${navegador}, ${path}]
    
 Quando eu preencher os dados do formulario com as informacoes do aluno
     ${nome}        Get Value From Json    ${conteudoJson}    $.usuarios.aluno.nome

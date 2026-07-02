@@ -9,8 +9,14 @@ Resource    ../../Resources/base.robot
 ${proxima_pagina}       //*[@id="pnnext"]/span[2]
 
 *** Keywords ***
-Dado que abri o google no navegador
-    Abrir browser    http://www.google.com    chrome
+Dado que abri o ${buscador} no navegador
+    IF    "${buscador}" == "google"
+        ${url}    Set Variable     http://www.google.com
+    END
+    IF    "${buscador}" == "bing" 
+        ${url}    Set Variable     http://www.bing.com
+    END
+    Abrir browser    ${url}    chrome
 
 Quando digitar um termo [${termo}]
     [Documentation]    Insira o termo a ser pesquisado no lugar da variavel entre colchetes

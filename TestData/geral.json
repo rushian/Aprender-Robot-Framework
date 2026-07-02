@@ -1,6 +1,6 @@
 {
   "urls":{
-    "local":"\\Resources\\teste.html",
+    "local": "Resources\\teste.html",
     "gg":"http://www.google.com",
     "prod":"http://www.blazedemo.com"
   },

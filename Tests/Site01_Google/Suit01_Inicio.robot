@@ -5,9 +5,9 @@ Resource            ../../Pages/Site01_Google/Steps01_Inicio.robot
 
 *** Test Cases ***
 CT01 Abrir site e pesquisar
-    [Documentation]    ID JIRA 2065557 - Abrir navegador na pagina do google e pesquisar um termo
+    [Documentation]    ID JIRA 2065557 - Abrir navegador na pagina do bing e pesquisar um termo
     [Tags]    positivo    abrirsite
-    Dado que abri o google no navegador
+    Dado que abri o bing no navegador
     Quando digitar um termo [testes automatizados]
     E apertar tab
     E clicar no pesquisar

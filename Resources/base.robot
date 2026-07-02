@@ -11,13 +11,12 @@ Library             JSONLibrary
 Library             OperatingSystem
 Library             RequestsLibrary
 Library             String
+
 Library             geral.py
-
-
 
 *** Variables ***
 ${PATH_DO_CHROMEDRIVER}    E:\\qa\\venv\\Scripts\\chromedriver.exe
-${navegador}    chrome
+${navegador}    firefox
 *** Keywords ***
 Abrir browser
     [Documentation]    Abre o navegador escolhido com a url fornecida

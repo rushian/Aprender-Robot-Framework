@@ -1,7 +1,8 @@
 /.pytest_cache
 /Evidencias
-/log.html
-/report.html
+/results
+log.html
+report.html
 *.log
 *.png
 *.pyc
