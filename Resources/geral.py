@@ -41,7 +41,7 @@ def ler_qtde_linhas_na_planilha(fileName, sheetname) :
     colEndIndex = worksheet.ncols - 1 
     print (rowEndIndex)
     return rowEndIndex
-#ler_qtde_linhas_na_planilha('C:\\Users\\f675422\\Downloads\\excel (1).xls', 'Sheet0')
+#ler_qtde_linhas_na_planilha('C:\\Users\\f675422\\Downloads\\excel (1).xls', 'Sheet0') 
 
 def ler_docx(fileName) : 
     my_text = docx2txt.process(fileName)
@@ -54,7 +54,7 @@ def randomize_value(start: int, end: int):
 	Definir um numero aleatorio no range entre o valor inicial e final
 	"""
 	value = random.randint(start,end)
-	print('\nLimite inicial: ',start,' Limite final: ',end,'\nValor: ',value,flush=True)
+	print('\nLimite inicial:  ',start,' Limite final:  ',end,'\nValor: ',value,flush=True)
 	return value
 #randomize_value(1,8)
 
