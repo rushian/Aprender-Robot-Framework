@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Learning</title>
+		<style type="text/css">
+			:root {
+				--fundo: #14171c;
+				--painel: #1c2027;
+				--painel-2: #262c35;
+				--borda: #2c333d;
+				--texto: #d7dce2;
+				--texto-suave: #8b94a0;
+				--destaque: #f5b942;
+				--destaque-forte: #ffd27a;
+				--perigo: #a80000;
+			}
+
+			* { box-sizing: border-box; }
+
+			body {
+				background: radial-gradient(1200px 600px at 10% -10%, #222833 0%, var(--fundo) 60%);
+				background-color: var(--fundo);
+				color: var(--texto);
+				font-family: 'Segoe UI', 'Arial Narrow', Arial, sans-serif;
+				line-height: 1.5;
+				max-width: 1320px;
+				margin: 0 auto;
+				padding: 40px 24px 60px;
+			}
+
+			h1 {
+				font-family: 'Open Sans', 'Segoe UI', Helvetica, sans-serif;
+				text-transform: uppercase;
+				font-size: 1.5rem;
+				letter-spacing: .06em;
+				color: var(--destaque);
+				margin: 0 0 24px;
+				padding-left: 14px;
+				border-left: 5px solid var(--destaque);
+			}
+
+			/* Tabelas */
+			table {
+				width: 100%;
+				border-collapse: separate;
+				border-spacing: 0;
+				border: 1px solid var(--borda);
+				border-radius: 10px;
+				overflow: hidden;
+				margin: 14px 0;
+				background: var(--painel);
+			}
+			th {
+				background: var(--painel-2);
+				color: var(--destaque);
+				text-align: left;
+				font-size: .85rem;
+				text-transform: uppercase;
+				letter-spacing: .05em;
+				padding: 10px 12px;
+			}
+			td {
+				padding: 9px 12px;
+				border-top: 1px solid var(--borda);
+			}
+			tbody tr:nth-child(even) td { background: rgba(255, 255, 255, .025); }
+			tr.inativo td { color: var(--texto-suave); }
+
+			/* Campos */
+			input, select {
+				background: #0f1216;
+				color: var(--texto);
+				border: 1px solid #3a4350;
+				border-radius: 8px;
+				padding: 8px 10px;
+				margin: 3px 2px;
+				font-size: .95rem;
+				font-family: inherit;
+			}
+			input:focus, select:focus, textarea:focus {
+				outline: none;
+				border-color: var(--destaque);
+				box-shadow: 0 0 0 3px rgba(245, 185, 66, .2);
+			}
+			input::placeholder { color: #5f6875; }
+			input[type="checkbox"], input[type="radio"] {
+				width: 16px;
+				height: 16px;
+				padding: 0;
+				margin: 0 6px 0 2px;
+				accent-color: var(--destaque);
+				vertical-align: middle;
+			}
+
+			/* Botoes */
+			button {
+				background: var(--destaque);
+				color: #1a1a1a;
+				border: none;
+				border-radius: 8px;
+				padding: 9px 16px;
+				margin: 6px 2px;
+				font-weight: 600;
+				font-size: .9rem;
+				cursor: pointer;
+				transition: background .15s, transform .05s;
+			}
+			button:hover { background: var(--destaque-forte); }
+			button:active { transform: translateY(1px); }
+
+			/* Links (mantem os estados originais) */
+			a {
+				font-family: 'Franklin Gothic Medium', 'Segoe UI', Arial, sans-serif;
+				color: var(--destaque);
+				text-underline-offset: 3px;
+			}
+			a:hover { color: #fff; }
+			a:visited { color: #c0c0c0; }
+			a:focus { color: var(--perigo); }
+			a:active { color: #e1ff39; }
+			a:not([href]) { cursor: default; text-decoration: underline; }
+			p { margin: 8px 0; }
+
+			/* Layout */
+			.geral {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 24px;
+				width: 100%;
+				margin-bottom: 24px;
+			}
+			.cinquenta {
+				flex: 1 1 460px;
+				min-width: 0;
+				background: var(--painel);
+				border: 1px solid var(--borda);
+				border-radius: 16px;
+				padding: 22px;
+				box-shadow: 0 8px 24px rgba(0, 0, 0, .25);
+			}
+
+			/* Grupos de campos */
+			.dados {
+				border: 1px solid rgba(245, 185, 66, .45);
+				border-radius: 14px;
+				padding: 14px 16px;
+				margin: 0 0 16px;
+			}
+			legend {
+				color: var(--destaque);
+				font-weight: 600;
+				padding: 0 8px;
+			}
+
+			/* Caixas de texto (payload) */
+			.caixa {
+				display: block;
+				width: 100%;
+				height: 240px;
+				background: #0b0d10;
+				color: #e6edf3;
+				border: 1px solid var(--borda);
+				border-radius: 10px;
+				padding: 12px;
+				margin-bottom: 14px;
+				font-family: Consolas, 'Courier New', monospace;
+				font-size: .85rem;
+				resize: vertical;
+			}
+
+			/* Mensagem */
+			.msg {
+				background: #5a2328;
+				width: 100%;
+				border-radius: 14px;
+				border: 1px solid #c0505a;
+				color: #fff;
+				font-family: 'Segoe UI', Arial, sans-serif;
+				padding: 14px 18px;
+				margin: 0 0 20px;
+			}
+
+			@media (max-width: 600px) {
+				body { padding: 24px 14px 40px; }
+				.cinquenta { padding: 16px; }
+			}
+		</style>
+	</head>
+	<body>
+		<a name='h1'></a><h1>Tabelas e campos para testar as palavras-chaves do robot</h1>
+		<div id="mensagem" style="display: none;" class="msg">
+  	aaaaaa
+		</div>
+		<div class="geral">
+			<div class="cinquenta">
+				<p>Campo preenchido <input id="campo-com-valor" value="   valor   23    " onfocus="this.select();"></p>
+
+				<button onclick="openWin()" >
+					<span>Imprimir contrato</span>
+				</button>
+				<table width='80%'>
+					<thead>
+						<tr style="font-weight: bold">
+							<th>Ativar</th>
+							<th>Texto</th>
+							<th>titulo3</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+								<td>Dado 1</td>
+								<td>Dado 2</td>
+								<td>Dado 3</td>
+						</tr>
+						<tr>
+								<td>Dado 4</td>
+								<td>Dado 5</td>
+								<td>Dado 6</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>
+					<a class="header__nav--ctas-matricule" href="#">Matricule-se</a></p>
+
+				<div style="padding: 10px;">
+					<fieldset  id="dados" class="dados">
+						<legend>Dados do Usuario</legend>
+						<input id="name" placeholder="Nome" value="Luciano" onfocus="this.select();"><br>
+						<input id="address" placeholder="Endereço" value="endereco completo"><br>
+						<input id="phone" placeholder="Telefone">
+						<input id="email" placeholder="Email"><br>
+						<button id="contador" onclick="alert('campos preenchidos: ' + contarInputsPreenchidos())">Contar inputs preenchidos</button>
+					</fieldset>
+					<fieldset  id="contas" class="dados">
+						<legend>Dados da conta</legend>
+						<input id="usuario" placeholder="Usuario"><br>
+						<input id="banco" placeholder="Banco" style="width: 60px;">
+						<input id="agencia" placeholder="Agencia" style="width: 60px;">
+						<input id="conta" placeholder="Conta">
+						<input id="digito" placeholder="Digito" style="width: 40px;"><br>
+						<input id="saldo" placeholder="Saldo"><br>
+						<button id="mostraMsg" onclick="mostrarMensagem()">Ver a mensagem</button>
+					</fieldset>
+				</div>
+				<table>
+					<thead>
+					<tr>
+					<th style="width: 80px;" >Ativar</th>
+					<th style="width: 200px;" >Ação</th>
+					<th>Numero</th>
+					</tr>
+					</thead>
+					<tbody >
+					<tr class="inativo">
+						<td  style="text-align: center;"><label  ><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td> CREDITO</td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td></tr>
+					<tr class="inativo">
+						<td  style="text-align: center;"><label  ><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td> AGENDAMENTO</td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td>
+					</tr>
+					<tr>
+						<td style="text-align: center;"><label  ><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td > DESFAZER </td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td>
+					</tr>
+					<tr  class="inativo">
+						<td  style="text-align: center;"><label><input  type="checkbox"><span ><i  class="fas fa-check"></i></span></label></td>
+						<td > ESTORNO</td>
+						<td><input  type="text" style="width: 170px;" placeholder="00.00.00.000.0000.0000"></td>
+					</tr></tbody>
+				</table>
+			</div>
+			<div  class="cinquenta">
+				<textarea class="caixa" id="payload" readonly>
+{
+  "paciente": [
+    {
+      "dados_pessoais": {
+        "nome": "Luciano Silva",
+        "idade": 35
+      },
+      "dados_clinicos": {
+        "data_consulta": "2023-07-03",
+        "medico": "Dr. Carlos",
+        "receituario": "Tomar medicamento X, 1 vez ao dia"
+      }
+    },
+    {
+      "dados_pessoais": {
+        "nome": "Maria Souza",
+        "idade": 42
+      },
+      "dados_clinicos": {
+        "data_consulta": "2023-07-05",
+        "medico": "Dr. Ana",
+        "receituario": "Tomar medicamento Y, 2 vezes ao dia"
+      }
+    },
+    {
+      "dados_pessoais": {
+        "nome": "Carlos Alberto",
+        "idade": 18
+      },
+      "dados_clinicos": {
+        "data_consulta": "2023-03-08",
+        "medico": "Dr. Carlos",
+        "receituario": "Indisponivel"
+      }
+    }
+  ]
+}</textarea>
+<textarea class="caixa" id="payload">
+{
+	"paciente": [
+	{
+		"dados_pessoais": {
+		"nome": "Luke",
+		"idade": 35
+		},
+		"dados_clinicos": {
+		"data_consulta": "2023-07-03",
+		"medico": "Dr. Carlos",
+		"receituario": "Tomar medicamento X, 1 vez ao dia"
+		}
+	}
+	]
+}</textarea>
+			</div>
+		</div>
+
+		<div class="geral">
+			<div class="cinquenta">
+			<select id="drops">
+				<option>Primeira opcao</option>
+				<option>Teste</option>
+				<option>Terceira opcao</option>
+				<option>Quarta opcao</option>
+			</select>
+
+				<p><a>teste</a></p>
+				<p><a>teste</a></p>
+				<p><a>teste</a></p>
+				<p><a>teste</a></p>
+				<p><a href="#h1">Ir para o titulo</a></p>
+
+			</div>
+			<div class="cinquenta">
+				<table width='80%'>
+				<thead>
+					<tr style="font-weight: bold">
+						<th>Ativar</th>
+						<th>Peça</th>
+						<th>titulo3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+							<td>Dado 1</td>
+							<td>Dado 2</td>
+							<td>Dado 3</td>
+					</tr>
+					<tr>
+							<td>Dado 4</td>
+							<td>Dado 5</td>
+							<td>Dado 6</td>
+					</tr>
+				</tbody>
+			</table>
+			<input type="radio" name="amortizacao" value="s"> sac
+			<input type="radio" name="amortizacao" value="p"> price
+		</div>
+
+	</div>
+
+
+
+
+
+		<script>
+			function mostrarMensagem() {
+				const mensagem = document.getElementById("mensagem");
+				const user = document.getElementById("usuario").value;
+				const banco = document.getElementById("banco").value;
+				const agencia = document.getElementById("agencia").value;
+				const conta = document.getElementById("conta").value;
+				const digito = document.getElementById("digito").value;
+				const saldo = document.getElementById("saldo").value;
+
+				const msg = `Dados do usuario: ${user}<br> Banco: ${banco} Agencia: ${agencia} Conta: ${conta} - ${digito} <br>Saldo: R$ ` + formataSaldo(saldo);
+				mensagem.innerHTML = msg;
+				mensagem.style.display = "block";
+				scrollTo(0,0);
+			}
+			function formataSaldo(saldo_in){
+				var saldo = saldo_in.toString();
+				if (!saldo.includes(".")) {
+					if(saldo == '')
+						saldo = 0
+					// Se não possui, adiciona "." e "00" ao final da string
+					return `${saldo},00`;
+				}
+				// Separa a parte inteira da parte decimal
+				const [parteInteira, parteDecimal] = saldo.split(".");
+
+				// Formata a parte inteira com vírgulas
+				const parteInteiraFormatada = parteInteira.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+
+				// Se a parte decimal não existe, retorna a parte inteira formatada
+				if (!parteDecimal) return parteInteiraFormatada+',00';
+
+				// Se o módulo do saldo por 0,1 é 0, adiciona "0" no final da parte decimal
+				const parteDecimalFinal = Math.round(saldo_in % 0.1 *100)/100 === 0.1 ? `${parteDecimal}0` : `${parteDecimal}`;
+
+				// Retorna a string formatada
+				return `${parteInteiraFormatada},${parteDecimalFinal}`;
+			}
+
+			function openWin(){
+				myWindow = window.open('','','width=800,height=600');
+				myWindow.document.write("<p>This is 'myWindow'</p>");
+				//myWindow.focus();
+				//confirm('a')
+				myWindow.print();
+			}
+			function contarInputsPreenchidos() {
+			// Obtém o elemento fieldset
+				const fieldset = document.getElementById("dados");
+
+				// Verifica se o fieldset existe
+				if (!fieldset) {
+					console.error("Elemento fieldset não encontrado");
+					return 0;
+				}
+
+			// Obtém todos os elementos input dentro do fieldset
+			const inputs = fieldset.querySelectorAll("input");
+
+			// Contador de inputs preenchidos
+			let contagem = 0;
+
+			// Percorre os inputs
+			for (const input of inputs) {
+				// Verifica se o valor do input não está vazio
+				if (input.value.trim() !== "") {
+					// Incrementa o contador
+					contagem++;
+				}
+			}
+
+			// Retorna a contagem de inputs preenchidos
+			return contagem;
+		}
+
+		</script>
+	</body>
+</html>

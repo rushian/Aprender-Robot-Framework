@@ -28,6 +28,12 @@ def pagina_inicial():
     return FileResponse(PASTA / "Resources" / "index.html")
 
 
+@app.get("/laboratorio")
+def pagina_laboratorio():
+    """Página de laboratório usada para treinar automação com o Robot."""
+    return FileResponse(PASTA / "Resources" / "laboratorio.html")
+
+
 @app.get("/status")
 def status():
     """Rota para testar se a API está no ar."""
