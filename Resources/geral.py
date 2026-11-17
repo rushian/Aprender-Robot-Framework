@@ -31,7 +31,7 @@ def verificar_ambiente():
     numero2 = 3
     print(f'{numero1} + {numero2} = ', str((numero1+numero2)))
     return  versao, sistema, maquina
-print(verificar_ambiente())
+
 
 def ler_qtde_linhas_na_planilha(fileName, sheetname) : 
     workbook = xlrd.open_workbook(fileName)
@@ -133,93 +133,62 @@ def convert_json_to_xlsx(json_file_path, xlsx_file_path):
     Rotina para gerar xlsx a partir do json
     """
     # Carrega o arquivo JSON
-    with open(json_file_path, 'r') as file:
+    with open(json_file_path, 'r', encoding='utf-8') as file:
         json_data = json.load(file)
 
     # Extrai os dados do JSON
-    pacientes = json_data['paciente']
     dados = []
+    for paciente in json_data['paciente']:
+        dados.append([
+            paciente['dados_pessoais']['nome'],
+            paciente['dados_pessoais']['idade'],
+            paciente['dados_clinicos']['data_consulta'],
+            paciente['dados_clinicos']['medico'],
+            paciente['dados_clinicos']['receituario'],
+        ])
 
-    # Itera sobre os pacientes e extrai as informações
-    for paciente in pacientes:
-        nome = paciente['dados_pessoais']['nome']
-        idade = paciente['dados_pessoais']['idade']
-        data_consulta = paciente['dados_clinicos']['data_consulta']
-        medico = paciente['dados_clinicos']['medico']
-        receituario = paciente['dados_clinicos']['receituario']
+    colunas = ['Nome', 'Idade', 'Data da Consulta', 'Médico', 'Receituário']
 
-        # Adiciona as informações na lista de dados
-        dados.append([nome, idade, data_consulta, medico, receituario])
-
-    # Cria um DataFrame a partir dos dados
-    df = pd.DataFrame(dados, columns=['Nome', 'Idade', 'Data da Consulta', 'Médico', 'Receituário'])
-
-    # Cria um novo arquivo XLSX usando openpyxl
+    # Cria o arquivo XLSX usando openpyxl
     book = Workbook()
-    writer = pd.ExcelWriter(xlsx_file_path, engine='openpyxl')
-    writer.book = book
-
-    # Obtém a planilha ativa
-    writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
     sheet = book.active
 
+    # Cabeçalhos (linhas 1 a 3)
     sheet.cell(row=1, column=1).value = 'Paciente'
     sheet.cell(row=2, column=1).value = 'Dados Pessoais'
     sheet.cell(row=2, column=3).value = 'Dados Clinicos'
+    for col_idx, nome_coluna in enumerate(colunas, start=1):
+        sheet.cell(row=3, column=col_idx).value = nome_coluna
 
-    # Define a largura das colunas
-    for col in sheet.columns:
-        max_length = 0
-        column = get_column_letter(col[0].column)  # Obtém a letra da coluna
-        for cell in col:
-            try:
-                if len(str(cell.value)) > max_length:
-                    max_length = len(cell.value)
-            except:
-                pass
-        adjusted_width = (max_length + 2)
-        sheet.column_dimensions[column].width = adjusted_width
+    # Dados (a partir da linha 4)
+    for row_idx, linha in enumerate(dados, start=4):
+        for col_idx, valor in enumerate(linha, start=1):
+            sheet.cell(row=row_idx, column=col_idx).value = valor
 
-    # Preenche as células com os dados do DataFrame
-    for idx, row in df.iterrows():
-        for col_idx, value in enumerate(row):
-            sheet.cell(row=idx+4, column=col_idx+1).value = value
-
-    # Adiciona os nomes das colunas
-    for col_idx, column_name in enumerate(df.columns):
-        sheet.cell(row=3, column=col_idx+1).value = column_name
-
-
-   # Formatação das células
+    # Formatação dos cabeçalhos
+    borda = Border(
+        left=Side(style='thin'), right=Side(style='thin'),
+        top=Side(style='thin'), bottom=Side(style='thin')
+    )
     for row in sheet.iter_rows(min_row=1, max_row=3, min_col=1, max_col=5):
         for cell in row:
-            # Define a fonte negrito
             cell.font = Font(bold=True)
-            # Centraliza o texto na célula
             cell.alignment = Alignment(horizontal='center', vertical='center')
-            # Define as bordas completas
-            cell.border = Border(left=Side(style='thin'), right=Side(style='thin'), top=Side(style='thin'), bottom=Side(style='thin'))
+            cell.border = borda
 
-    # Ajusta automaticamente a largura das colunas
-    for column in sheet.columns:
-        max_length = 0
-        column_letter = column[0].column_letter
-        for cell in column:
-            try:
-                if len(str(cell.value)) > max_length:
-                    max_length = len(cell.value)
-            except:
-                pass
-        adjusted_width = (max_length + 2)
-        sheet.column_dimensions[column_letter].width = adjusted_width
-    
-	# Mescla as células nas linhas 1 e 2
+    # Ajusta a largura das colunas (considera os títulos da linha 3 e os dados)
+    for column in sheet.iter_cols(min_row=3, max_col=5):
+        max_length = max(len(str(cell.value or '')) for cell in column)
+        letra = get_column_letter(column[0].column)
+        sheet.column_dimensions[letra].width = max_length + 2
+
+    # Mescla as células nas linhas 1 e 2
     sheet.merge_cells('A1:E1')
     sheet.merge_cells('A2:B2')
     sheet.merge_cells('C2:E2')
 
     # Salva o arquivo XLSX
-    writer.save()
+    book.save(xlsx_file_path)
 
     print('Arquivo salvo em: ', xlsx_file_path)
 # Exemplo de uso

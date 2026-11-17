@@ -1,9 +1,11 @@
 /.pytest_cache
 /Evidencias
 /results
+venv/
 log.html
 report.html
 *.log
+*.env
 *.png
 *.pyc
 *.txt

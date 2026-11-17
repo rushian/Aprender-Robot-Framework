@@ -1,89 +1,77 @@
 """
-Funcoes de comunicacao e consultas a um banco de dados
+Funcoes de comunicacao e consultas a um banco de dados PostgreSQL
 """
 import json
-import oracledb
 import os
+from contextlib import closing
+
+import psycopg2
+
 
 def pegar_credenciais_db(json_credencial):
     """
-    Rotina para pegar credenciais do banco de dados num arquivo json, para utilizar passe 
-    no parametro o nome do arquivo, que deve ficar na pasta TestData
-    por exemplo: pegar_credenciais_db('credenciais_db')
+    Le as credenciais do banco em TestData/db/<json_credencial>.json
+    Exemplo: pegar_credenciais_db('credenciais_db')
     """
+    caminho = os.path.join('.', 'TestData', 'db', f'{json_credencial}.json')
+
     try:
-        caminho_credencial_json = "".join(['.', os.sep,'TestData', os.sep,'db',os.sep, json_credencial,'.json'])
+        with open(caminho, 'r', encoding='utf-8') as f:
+            dados = json.load(f)
     except FileNotFoundError:
-        print("Arquivo nao encontrado")
+        raise FileNotFoundError(f'Arquivo de credenciais nao encontrado: {caminho}')
 
-    with open(caminho_credencial_json, 'r') as f:
-        dados = json.load(f)
+    return (dados['host'], dados['port'], dados['db'],
+            dados['usuario'], dados['senha'])
 
-    host =     dados['host']
-    port =     dados['port']
-    database = dados['db']
-    usuario =  dados['usuario']
-    senha =    dados['senha']
 
-    return host, port, database, usuario, senha
+def _conectar(json_credencial='credenciais_db'):
+    """Abre uma conexao com o banco usando o arquivo de credenciais."""
+    host, port, database, usuario, senha = pegar_credenciais_db(json_credencial)
+    return psycopg2.connect(host=host, port=port, dbname=database,
+                            user=usuario, password=senha)
+
 
 def inserir_contato(contato, email, cargo):
     """
-	Inserir contatos na tabela FESTB750_CONTATO do DB
-	"""
-    # Configurações de conexão
-    host, port, database, username, password = pegar_credenciais_db('credenciais_db')
-    dsn = f'{host}/{database}'
+    Insere um contato na tabela fes.festb750_contato.
+    Se email == 'padrao', gera 'email<N>@teste.com'.
+    """
+    # closing() fecha a conexao; "with conn" faz commit (ou rollback em caso de erro)
+    with closing(_conectar()) as conn, conn, conn.cursor() as cursor:
+        # Bloqueia escritas concorrentes na tabela ate o fim da transacao,
+        # evitando que dois testes gerem o mesmo MAX + 1
+        cursor.execute("LOCK TABLE fes.festb750_contato IN SHARE ROW EXCLUSIVE MODE")
 
-    try:
-        with oracledb.connect(user=username, password=password, dsn=dsn) as connection:
-            with connection.cursor() as cursor:
-                sql = "SELECT max(NU_SQNCL_CONTATO) FROM FES.FESTB750_CONTATO"
-                for r in cursor.execute(sql):
-                    nu_seq = r
+        cursor.execute("SELECT COALESCE(MAX(nu_sqncl_contato), 0) FROM fes.festb750_contato")
+        nu_sqncl = cursor.fetchone()[0] + 1
 
-        with oracledb.connect(user=username, password=password, dsn=dsn) as connection:
-            with connection.cursor() as cursor:
-                NU_SQNCL_CONTATO = nu_seq[0] + 1
-                NO_CONTATO = contato
-                if(email == 'padrao'):
-                    DE_EMAIL_CONTATO = f'email{NU_SQNCL_CONTATO}@teste.com'
-                else:
-                    DE_EMAIL_CONTATO = email
-                DE_CARGO_CONTATO = cargo
+        if email == 'padrao':
+            email = f'email{nu_sqncl}@teste.com'
 
-                sql = "INSERT INTO FES.FESTB750_CONTATO VALUES (:NU_SQNCL_CONTATO, :NO_CONTATO, :DE_EMAIL_CONTATO, :DE_CARGO_CONTATO)"
-                cursor.execute(sql, NU_SQNCL_CONTATO=NU_SQNCL_CONTATO, NO_CONTATO=NO_CONTATO,
-                                DE_EMAIL_CONTATO=DE_EMAIL_CONTATO,DE_CARGO_CONTATO=DE_CARGO_CONTATO)
+        cursor.execute(
+            """
+            INSERT INTO fes.festb750_contato
+                (nu_sqncl_contato, no_contato, de_email_contato, de_cargo_contato)
+            VALUES (%s, %s, %s, %s)
+            """,
+            (nu_sqncl, contato, email, cargo)
+        )
 
-            # Confirma a transacao
-            connection.commit()
-        print("Registro inserido com sucesso!")
-        return  "Registro inserido com sucesso!"
+    mensagem = f'Registro {nu_sqncl} inserido com sucesso!'
+    print(mensagem)
+    return mensagem
 
-    except oracledb.Error as e:
-        print(f"Erro ao conectar ao banco de dados: {e}")
-        return  "Erro ao conectar ao banco de dados: {e}"
 
 def listar_contatos():
-    """
-	Ler contatos da tabela FESTB750_CONTATO do DB
-	"""
-    # Configurações de conexão
-    host, port, database, username, password = pegar_credenciais_db('credenciais_db')
-    dsn = f'{host}/{database}'
-    contatos = []
+    """Retorna todos os contatos da tabela fes.festb750_contato."""
+    with closing(_conectar()) as conn, conn.cursor() as cursor:
+        cursor.execute("SELECT * FROM fes.festb750_contato ORDER BY nu_sqncl_contato")
+        contatos = cursor.fetchall()
 
-    try:
-        with oracledb.connect(user=username, password=password, dsn=dsn) as connection:
-            with connection.cursor() as cursor:
-                sql = "SELECT * FROM FES.FESTB750_CONTATO ORDER BY NU_SQNCL_CONTATO"
-                for r in cursor.execute(sql):
-                    contatos.append(r)
-        print(contatos)
-        return  contatos
+    print(contatos)
+    return contatos
 
-    except oracledb.Error as e:
-        print(f"Erro ao conectar ao banco de dados: {e}")
-        return  "Erro ao conectar ao banco de dados: {e}"
-listar_contatos()
+
+if __name__ == '__main__':
+    listar_contatos()
