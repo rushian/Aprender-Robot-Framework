@@ -8,5 +8,4 @@ report.html
 *.env
 *.png
 *.pyc
-*.txt
 *.xml

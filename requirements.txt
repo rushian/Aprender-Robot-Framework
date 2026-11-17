@@ -1,0 +1,14 @@
+docx2txt==0.9
+EasyProcess==1.1
+entrypoint2==1.1
+et_xmlfile==2.0.0
+mss==10.2.0
+numpy==2.5.5
+openpyxl==3.1.5
+pandas==3.1.1
+pillow==13.0.0
+psycopg2-binary==2.9.13
+pyscreenshot==3.1
+python-dateutil==4.0.0
+tzdata==2026.6
+xlrd==2.0.2
