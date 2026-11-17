@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Tarefas</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 520px; margin: 40px auto; padding: 0 16px; background: #f4f6f8; color: #222; }
+    h1 { text-align: center; }
+    form { display: flex; gap: 8px; margin-bottom: 20px; }
+    input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
+    button { padding: 10px 14px; border: none; border-radius: 6px; background: #2563eb; color: #fff; font-size: 15px; cursor: pointer; }
+    button:hover { background: #1d4ed8; }
+    ul { list-style: none; padding: 0; }
+    li { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 12px; margin-bottom: 8px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    li span { flex: 1; }
+    li.concluida span { text-decoration: line-through; color: #888; }
+    li button.remover { background: #dc2626; padding: 6px 10px; }
+    li button.remover:hover { background: #b91c1c; }
+    #vazio { text-align: center; color: #777; }
+  </style>
+</head>
+<body>
+  <h1>Minhas Tarefas</h1>
+
+  <form id="form-tarefa">
+    <input type="text" id="titulo" placeholder="Nova tarefa..." required>
+    <button type="submit">Adicionar</button>
+  </form>
+
+  <ul id="lista"></ul>
+  <p id="vazio" hidden>Nenhuma tarefa ainda.</p>
+
+  <script>
+    const lista = document.getElementById("lista");
+    const vazio = document.getElementById("vazio");
+    const form = document.getElementById("form-tarefa");
+    const inputTitulo = document.getElementById("titulo");
+
+    // Busca as tarefas na API e desenha na tela
+    async function carregarTarefas() {
+      const resposta = await fetch("/tarefas");
+      const tarefas = await resposta.json();
+
+      lista.innerHTML = "";
+      vazio.hidden = tarefas.length > 0;
+
+      tarefas.forEach(function (t) {
+        const li = document.createElement("li");
+        if (t.concluida) li.classList.add("concluida");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.checked = t.concluida;
+        checkbox.addEventListener("change", function () {
+          alternarConcluida(t);
+        });
+
+        const texto = document.createElement("span");
+        texto.textContent = t.titulo;
+
+        const botao = document.createElement("button");
+        botao.textContent = "Remover";
+        botao.className = "remover";
+        botao.addEventListener("click", function () {
+          removerTarefa(t.id);
+        });
+
+        li.append(checkbox, texto, botao);
+        lista.appendChild(li);
+      });
+    }
+
+    // Cria uma tarefa (POST)
+    form.addEventListener("submit", async function (evento) {
+      evento.preventDefault();
+      await fetch("/tarefas", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ titulo: inputTitulo.value, concluida: false })
+      });
+      inputTitulo.value = "";
+      carregarTarefas();
+    });
+
+    // Marca/desmarca como concluída (PUT)
+    async function alternarConcluida(tarefa) {
+      await fetch("/tarefas/" + tarefa.id, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ titulo: tarefa.titulo, concluida: !tarefa.concluida })
+      });
+      carregarTarefas();
+    }
+
+    // Remove a tarefa (DELETE)
+    async function removerTarefa(id) {
+      await fetch("/tarefas/" + id, { method: "DELETE" });
+      carregarTarefas();
+    }
+
+    carregarTarefas();
+  </script>
+</body>
+</html>

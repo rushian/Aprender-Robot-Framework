@@ -1,5 +1,11 @@
+from pathlib import Path
+
 from fastapi import FastAPI, HTTPException
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
+
+# Pasta onde está o main.py (usada para achar Resources/index.html)
+PASTA = Path(__file__).parent
 
 # Cria a aplicação. O título aparece na documentação (/docs)
 app = FastAPI(title="Minha primeira API")
@@ -17,8 +23,14 @@ proximo_id = 1
 
 
 @app.get("/")
-def raiz():
-    """Rota inicial: serve para testar se a API está no ar."""
+def pagina_inicial():
+    """Rota inicial: devolve a página de front (index.html)."""
+    return FileResponse(PASTA / "Resources" / "index.html")
+
+
+@app.get("/status")
+def status():
+    """Rota para testar se a API está no ar."""
     return {"mensagem": "API funcionando!"}
 
 
