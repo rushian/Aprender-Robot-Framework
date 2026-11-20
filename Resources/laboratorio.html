@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Learning</title>
+		<title>Profissão QA - Laboratório de Testes</title>
 		<style type="text/css">
 			:root {
 				--fundo: #14171c;
@@ -27,7 +27,8 @@
 				line-height: 1.5;
 				max-width: 1320px;
 				margin: 0 auto;
-				padding: 40px 24px 60px;
+				padding: 72px 24px 60px;
+				position: relative;
 			}
 
 			h1 {
@@ -123,6 +124,22 @@
 			a:not([href]) { cursor: default; text-decoration: underline; }
 			p { margin: 8px 0; }
 
+			/* Link para voltar ao inicio (fica no topo da tela, mas por ultimo no HTML) */
+			a.voltar {
+				position: absolute;
+				top: 22px;
+				left: 24px;
+				display: inline-block;
+				padding: 7px 14px;
+				border: 1px solid var(--borda);
+				border-radius: 999px;
+				background: var(--painel);
+				color: var(--destaque);
+				font-size: .9rem;
+				text-decoration: none;
+			}
+			a.voltar:hover { background: var(--painel-2); color: #fff; }
+
 			/* Layout */
 			.geral {
 				display: flex;
@@ -183,7 +200,8 @@
 			}
 
 			@media (max-width: 600px) {
-				body { padding: 24px 14px 40px; }
+				body { padding: 64px 14px 40px; }
+				a.voltar { left: 14px; }
 				.cinquenta { padding: 16px; }
 			}
 		</style>
@@ -379,6 +397,8 @@
 
 
 
+
+		<a class="voltar" href="/">&larr; Voltar ao início</a>
 
 		<script>
 			function mostrarMensagem() {

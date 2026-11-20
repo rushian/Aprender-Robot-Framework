@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minhas Tarefas</title>
   <style>
-    body { font-family: Arial, sans-serif; max-width: 520px; margin: 40px auto; padding: 0 16px; background: #f4f6f8; color: #222; }
-    h1 { text-align: center; }
+    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 16px; background: #f4f6f8; color: #222; }
+    h2 { margin-top: 0; }
+    .colunas { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start; }
+    @media (max-width: 700px) { .colunas { grid-template-columns: 1fr; } }
     form { display: flex; gap: 8px; margin-bottom: 20px; }
     input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
     button { padding: 10px 14px; border: none; border-radius: 6px; background: #2563eb; color: #fff; font-size: 15px; cursor: pointer; }
@@ -18,19 +20,18 @@
     li button.remover { background: #dc2626; padding: 6px 10px; }
     li button.remover:hover { background: #b91c1c; }
     #vazio { text-align: center; color: #777; }
-    a.lab { display: block; margin-bottom: 24px; padding: 14px 16px; background: #fff; border-left: 5px solid #2563eb; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.08); text-decoration: none; color: #222; }
+    a.lab { display: block; margin-bottom: 12px; padding: 14px 16px; background: #fff; border-left: 5px solid #2563eb; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.08); text-decoration: none; color: #222; }
     a.lab strong { display: block; color: #2563eb; }
     a.lab span { font-size: 14px; color: #555; }
     a.lab:hover { box-shadow: 0 2px 8px rgba(0,0,0,.15); }
   </style>
 </head>
 <body>
-  <h1>Minhas Tarefas</h1>
+<div class="colunas">
 
-  <a class="lab" href="/laboratorio">
-    <strong>Laboratório de testes</strong>
-    <span>Página para treinar automação com Robot Framework &rarr;</span>
-  </a>
+  <!-- Coluna 1: tarefas -->
+  <section>
+  <h2>Tarefas</h2>
 
   <form id="form-tarefa">
     <input type="text" id="titulo" placeholder="Nova tarefa..." required>
@@ -39,6 +40,24 @@
 
   <ul id="lista"></ul>
   <p id="vazio" hidden>Nenhuma tarefa ainda.</p>
+  </section>
+
+  <!-- Coluna 2: links -->
+  <aside>
+    <h2>Links</h2>
+
+    <a class="lab" href="/laboratorio">
+      <strong>Laboratório de testes</strong>
+      <span>Página para treinar automação com Robot Framework &rarr;</span>
+    </a>
+
+    <a class="lab" href="/docs">
+      <strong>Swagger</strong>
+      <span>Documentação interativa da API &rarr;</span>
+    </a>
+  </aside>
+
+</div>
 
   <script>
     const lista = document.getElementById("lista");
