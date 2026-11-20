@@ -1,32 +1,147 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Minhas Tarefas</title>
+
+  <!-- Aplica o tema salvo antes de desenhar a página (evita "piscar" de cor) -->
+  <script>
+    (function () {
+      var tema = "dark";
+      try { tema = localStorage.getItem("tema") || "dark"; } catch (e) {}
+      document.documentElement.setAttribute("data-theme", tema);
+    })();
+  </script>
+
   <style>
-    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 16px; background: #f4f6f8; color: #222; }
+    /* ===== Temas ===== */
+
+    /* Dark (padrão): preto, azul e ciano */
+    :root, :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #05070a;
+      --surface: #0b1118;
+      --text: #e6f1f7;
+      --muted: #8aa4b5;
+      --muted-2: #5f7788;
+      --accent: #22d3ee;
+      --accent-hover: #67e8f9;
+      --accent-text: #031317;
+      --accent-2: #2563eb;
+      --border: #16384a;
+      --shadow: rgba(0, 0, 0, .6);
+      --danger: #ef4444;
+      --danger-hover: #f87171;
+      --danger-text: #ffffff;
+      --seletor-borda: #22d3ee;
+    }
+
+    /* Light: o visual original da página */
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --text: #222222;
+      --muted: #555555;
+      --muted-2: #888888;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --accent-text: #ffffff;
+      --accent-2: #2563eb;
+      --border: #cccccc;
+      --shadow: rgba(0, 0, 0, .08);
+      --danger: #dc2626;
+      --danger-hover: #b91c1c;
+      --danger-text: #ffffff;
+      --seletor-borda: #2563eb;
+    }
+
+    /* Purple: grafite e roxo */
+    :root[data-theme="purple"] {
+      color-scheme: dark;
+      --bg: #1f2128;
+      --surface: #2b2e38;
+      --text: #ece8f5;
+      --muted: #a9a3bd;
+      --muted-2: #7d7794;
+      --accent: #8b5cf6;
+      --accent-hover: #a78bfa;
+      --accent-text: #ffffff;
+      --accent-2: #7c3aed;
+      --border: #3d4150;
+      --shadow: rgba(0, 0, 0, .45);
+      --danger: #e5484d;
+      --danger-hover: #f2555a;
+      --danger-text: #ffffff;
+      --seletor-borda: #8b5cf6;
+    }
+
+    /* Dourado */
+    :root[data-theme="gold"] {
+      color-scheme: dark;
+      --bg: #000000;
+      --surface: #000000;
+      --text: #000000;
+      --muted: #000000;
+      --muted-2: #000000;
+      --accent: #000000;
+      --accent-hover: #000000;
+      --accent-text: #000000;
+      --accent-2: #000000;
+      --border: #000000;
+      --shadow: transparent;
+      --danger: #000000;
+      --danger-hover: #000000;
+      --danger-text: #000000;
+      --seletor-borda: #d4af37;
+    }
+
+    /* ===== Layout ===== */
+    body { font-family: Arial, sans-serif; max-width: 1000px; margin: 40px auto; padding: 0 16px; background: var(--bg); color: var(--text); transition: background .2s, color .2s; }
     h2 { margin-top: 0; }
     .colunas { display: grid; grid-template-columns: 1.4fr 1fr; gap: 32px; align-items: start; }
     @media (max-width: 700px) { .colunas { grid-template-columns: 1fr; } }
+
+    /* Seletor de tema */
+    .topo { display: flex; justify-content: flex-end; margin-bottom: 24px; }
+    .temas { display: inline-flex; gap: 6px; padding: 6px; border: 2px solid var(--seletor-borda); border-radius: 10px; background: var(--surface); }
+    .temas button { padding: 6px 12px; font-size: 13px; background: var(--surface); color: var(--text); border: 1px solid var(--border); }
+    .temas button:hover { background: var(--surface); }
+    .temas button[aria-pressed="true"] { background: var(--accent); color: var(--accent-text); }
+
+    /* Tarefas */
     form { display: flex; gap: 8px; margin-bottom: 20px; }
-    input[type="text"] { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 6px; font-size: 16px; }
-    button { padding: 10px 14px; border: none; border-radius: 6px; background: #2563eb; color: #fff; font-size: 15px; cursor: pointer; }
-    button:hover { background: #1d4ed8; }
+    input[type="text"] { flex: 1; padding: 10px; border: 1px solid var(--border); border-radius: 6px; font-size: 16px; background: var(--surface); color: var(--text); }
+    input[type="text"]::placeholder { color: var(--muted-2); }
+    button { padding: 10px 14px; border: none; border-radius: 6px; background: var(--accent); color: var(--accent-text); font-size: 15px; cursor: pointer; }
+    button:hover { background: var(--accent-hover); }
     ul { list-style: none; padding: 0; }
-    li { display: flex; align-items: center; gap: 10px; background: #fff; padding: 10px 12px; margin-bottom: 8px; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    li { display: flex; align-items: center; gap: 10px; background: var(--surface); padding: 10px 12px; margin-bottom: 8px; border-radius: 6px; box-shadow: 0 1px 3px var(--shadow); }
     li span { flex: 1; }
-    li.concluida span { text-decoration: line-through; color: #888; }
-    li button.remover { background: #dc2626; padding: 6px 10px; }
-    li button.remover:hover { background: #b91c1c; }
-    #vazio { text-align: center; color: #777; }
-    a.lab { display: block; margin-bottom: 12px; padding: 14px 16px; background: #fff; border-left: 5px solid #2563eb; border-radius: 6px; box-shadow: 0 1px 3px rgba(0,0,0,.08); text-decoration: none; color: #222; }
-    a.lab strong { display: block; color: #2563eb; }
-    a.lab span { font-size: 14px; color: #555; }
-    a.lab:hover { box-shadow: 0 2px 8px rgba(0,0,0,.15); }
+    li.concluida span { text-decoration: line-through; color: var(--muted-2); }
+    li button.remover { background: var(--danger); color: var(--danger-text); padding: 6px 10px; }
+    li button.remover:hover { background: var(--danger-hover); }
+    #vazio { text-align: center; color: var(--muted); }
+
+    /* Links */
+    a.lab { display: block; margin-bottom: 12px; padding: 14px 16px; background: var(--surface); border-left: 5px solid var(--accent-2); border-radius: 6px; box-shadow: 0 1px 3px var(--shadow); text-decoration: none; color: var(--text); }
+    a.lab strong { display: block; color: var(--accent); }
+    a.lab span { font-size: 14px; color: var(--muted); }
+    a.lab:hover { box-shadow: 0 2px 8px var(--shadow); }
   </style>
 </head>
 <body>
+
+<div class="topo">
+  <nav class="temas" aria-label="Escolher tema">
+    <button type="button" id="tema-dark" data-tema="dark" aria-pressed="true">Dark</button>
+    <button type="button" id="tema-light" data-tema="light" aria-pressed="false">Light</button>
+    <button type="button" id="tema-purple" data-tema="purple" aria-pressed="false">Purple</button>
+    <button type="button" id="tema-gold" data-tema="gold" aria-pressed="false">Dourado</button>
+  </nav>
+</div>
+
 <div class="colunas">
 
   <!-- Coluna 1: tarefas -->
@@ -60,6 +175,28 @@
 </div>
 
   <script>
+    // ===== Temas =====
+    const TEMAS = ["dark", "light", "purple", "gold"];
+
+    function aplicarTema(tema) {
+      if (!TEMAS.includes(tema)) tema = "dark";
+      document.documentElement.setAttribute("data-theme", tema);
+      document.querySelectorAll(".temas button").forEach(function (b) {
+        b.setAttribute("aria-pressed", String(b.dataset.tema === tema));
+      });
+      try { localStorage.setItem("tema", tema); } catch (e) {}
+    }
+
+    document.querySelectorAll(".temas button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        aplicarTema(b.dataset.tema);
+      });
+    });
+
+    // Sincroniza os botões com o tema que foi carregado
+    aplicarTema(document.documentElement.getAttribute("data-theme"));
+
+    // ===== Tarefas =====
     const lista = document.getElementById("lista");
     const vazio = document.getElementById("vazio");
     const form = document.getElementById("form-tarefa");
